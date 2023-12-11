@@ -14,6 +14,7 @@ import {
 import MenuLink from './menuLink/menuLink';
 import Image from 'next/image';
 import Button from '@/app/common/Button';
+import Link from 'next/link';
 
 const SideBar = () => {
     const menuItems = [
@@ -80,10 +81,11 @@ const SideBar = () => {
     ];
     return (
         <div className='sticky top-10 h-screen'>
+
             <div className='flex items-center gap-5 mb-5 mt-3 ml-2'>
                 <Image className='object-cover' src='/noavatar.png' alt="" width={40} height={40} style={{ borderRadius: '50%' }} />
                 <div className='flex flex-col'>
-                    <span className='font-medium'>Huy Beo</span>
+                    <span className='font-medium cursor-pointer'>Huy Beo</span>
                     <span className='text-xs'>Admin</span>
                 </div>
             </div>
@@ -98,12 +100,13 @@ const SideBar = () => {
                 ))}
             </ul>
 
-
-            <Button
-                title='Logout'
-                styles='p-5 mt-1 mb-0 flex items-center gap-3 cursor-pointer rounded-xl bg-none border-none text-white w-full hover:bg-slate-700'
-                icon={<MdLogout />}
-            />
+            <Link href={'/login'}>
+                <Button
+                    title='Logout'
+                    styles='p-5 mt-1 mb-0 flex items-center gap-3 cursor-pointer rounded-xl bg-none border-none text-white w-full hover:bg-slate-700'
+                    icon={<MdLogout />}
+                />
+            </Link>
         </div>
     )
 }
