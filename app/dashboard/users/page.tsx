@@ -1,9 +1,12 @@
+
+
 import Button from '@/app/common/Button'
 import Search from '@/app/common/Search'
 import Link from 'next/link'
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Pagination from '@/app/ui/dashboard/pagination/pagination'
+import { fetchUsers } from '@/lib/data'
 
 const dataTable = [
     {
@@ -69,7 +72,12 @@ const dataTable = [
 //     },
 // ]
 
-const Users = () => {
+const Users = async () => {
+    const users = await fetchUsers()
+
+    // React.useEffect(() => (
+    // ), [users])
+
     return (
         <div className='bg-slate-900 p-5 rounded-xl mt-5'>
             <div className='flex justify-between items-center'>
@@ -97,186 +105,191 @@ const Users = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td className='p-3'>
-                            <div className='flex gap-3 items-center'>
-                                <Image style={{ borderRadius: '50%' }} className='object-cover' src='/noavatar.png' alt='logo-user' width={40} height={40} />
-                                Huy
-                            </div>
-                        </td>
-                        <td className='p-3'>
-                            <span>taolahuy2k0@gmail.com</span>
-                        </td>
-                        <td className='p-3'>
-                            <span>Oct 30 2023</span>
-                        </td>
-                        <td className='p-3'>
-                            <span>Client</span>
-                        </td>
-                        <td className='p-3'>
-                            <span>Passive</span>
-                        </td>
-                        <td className='p-3'>
-                            <div className='flex gap-2 items-center'>
-                                <Link href={'/'}>
-                                    <Button
-                                        title='View'
-                                        styles='p-2 bg-blue-600 text-white border-none rounded-md cursor-pointer hover:font-bold'
-                                    />
-                                </Link>
-                                <Button
-                                    title='Delete'
-                                    styles='p-2 bg-red-600 text-white border-none rounded-md cursor-pointer hover:font-bold'
-                                />
-                            </div>
+                    {users.map((users) => (
+                        <>
+                            <tr key={users.id}>
+                                <td className='p-3'>
+                                    <div className='flex gap-3 items-center'>
+                                        <Image style={{ borderRadius: '50%' }} className='object-cover' src={users.img} alt='logo-user' width={40} height={40} />
+                                        {users.username}
+                                    </div>
+                                </td>
+                                <td className='p-3'>
+                                    <span>{users.email}</span>
+                                </td>
+                                <td className='p-3'>
+                                    <span>Oct 30 2023</span>
+                                </td>
+                                <td className='p-3'>
+                                    <span>{users.isAdmin ? 'Admin' : 'Client'}</span>
+                                </td>
+                                <td className='p-3'>
+                                    <span>{users.isActive ? 'Passive' : 'UnPassive'}</span>
+                                </td>
+                                <td className='p-3'>
+                                    <div className='flex gap-2 items-center'>
+                                        <Link href={'/'}>
+                                            <Button
+                                                title='View'
+                                                styles='p-2 bg-blue-600 text-white border-none rounded-md cursor-pointer hover:font-bold'
+                                            />
+                                        </Link>
+                                        <Button
+                                            title='Delete'
+                                            styles='p-2 bg-red-600 text-white border-none rounded-md cursor-pointer hover:font-bold'
+                                        />
+                                    </div>
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className='p-3'>
-                            <div className='flex gap-3 items-center'>
-                                <Image style={{ borderRadius: '50%' }} className='object-cover' src='/noavatar.png' alt='logo-user' width={40} height={40} />
-                                Huy
-                            </div>
-                        </td>
-                        <td className='p-3'>
-                            <span>taolahuy2k0@gmail.com</span>
-                        </td>
-                        <td className='p-3'>
-                            <span>Oct 30 2023</span>
-                        </td>
-                        <td className='p-3'>
-                            <span>Client</span>
-                        </td>
-                        <td className='p-3'>
-                            <span>Passive</span>
-                        </td>
-                        <td className='p-3'>
-                            <div className='flex gap-2 items-center'>
-                                <Link href={'/'}>
-                                    <Button
-                                        title='View'
-                                        styles='p-2 bg-blue-600 text-white border-none rounded-md cursor-pointer hover:font-bold'
-                                    />
-                                </Link>
-                                <Button
-                                    title='Delete'
-                                    styles='p-2 bg-red-600 text-white border-none rounded-md cursor-pointer hover:font-bold'
-                                />
-                            </div>
+                                </td>
+                            </tr>
+                            {/* <tr>
+                                <td className='p-3'>
+                                    <div className='flex gap-3 items-center'>
+                                        <Image style={{ borderRadius: '50%' }} className='object-cover' src='/noavatar.png' alt='logo-user' width={40} height={40} />
+                                        Huy
+                                    </div>
+                                </td>
+                                <td className='p-3'>
+                                    <span>taolahuy2k0@gmail.com</span>
+                                </td>
+                                <td className='p-3'>
+                                    <span>Oct 30 2023</span>
+                                </td>
+                                <td className='p-3'>
+                                    <span>Client</span>
+                                </td>
+                                <td className='p-3'>
+                                    <span>Passive</span>
+                                </td>
+                                <td className='p-3'>
+                                    <div className='flex gap-2 items-center'>
+                                        <Link href={'/'}>
+                                            <Button
+                                                title='View'
+                                                styles='p-2 bg-blue-600 text-white border-none rounded-md cursor-pointer hover:font-bold'
+                                            />
+                                        </Link>
+                                        <Button
+                                            title='Delete'
+                                            styles='p-2 bg-red-600 text-white border-none rounded-md cursor-pointer hover:font-bold'
+                                        />
+                                    </div>
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className='p-3'>
-                            <div className='flex gap-3 items-center'>
-                                <Image style={{ borderRadius: '50%' }} className='object-cover' src='/noavatar.png' alt='logo-user' width={40} height={40} />
-                                Huy
-                            </div>
-                        </td>
-                        <td className='p-3'>
-                            <span>taolahuy2k0@gmail.com</span>
-                        </td>
-                        <td className='p-3'>
-                            <span>Oct 30 2023</span>
-                        </td>
-                        <td className='p-3'>
-                            <span>Client</span>
-                        </td>
-                        <td className='p-3'>
-                            <span>Passive</span>
-                        </td>
-                        <td className='p-3'>
-                            <div className='flex gap-2 items-center'>
-                                <Link href={'/'}>
-                                    <Button
-                                        title='View'
-                                        styles='p-2 bg-blue-600 text-white border-none rounded-md cursor-pointer hover:font-bold'
-                                    />
-                                </Link>
-                                <Button
-                                    title='Delete'
-                                    styles='p-2 bg-red-600 text-white border-none rounded-md cursor-pointer hover:font-bold'
-                                />
-                            </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td className='p-3'>
+                                    <div className='flex gap-3 items-center'>
+                                        <Image style={{ borderRadius: '50%' }} className='object-cover' src='/noavatar.png' alt='logo-user' width={40} height={40} />
+                                        Huy
+                                    </div>
+                                </td>
+                                <td className='p-3'>
+                                    <span>taolahuy2k0@gmail.com</span>
+                                </td>
+                                <td className='p-3'>
+                                    <span>Oct 30 2023</span>
+                                </td>
+                                <td className='p-3'>
+                                    <span>Client</span>
+                                </td>
+                                <td className='p-3'>
+                                    <span>Passive</span>
+                                </td>
+                                <td className='p-3'>
+                                    <div className='flex gap-2 items-center'>
+                                        <Link href={'/'}>
+                                            <Button
+                                                title='View'
+                                                styles='p-2 bg-blue-600 text-white border-none rounded-md cursor-pointer hover:font-bold'
+                                            />
+                                        </Link>
+                                        <Button
+                                            title='Delete'
+                                            styles='p-2 bg-red-600 text-white border-none rounded-md cursor-pointer hover:font-bold'
+                                        />
+                                    </div>
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className='p-3'>
-                            <div className='flex gap-3 items-center'>
-                                <Image style={{ borderRadius: '50%' }} className='object-cover' src='/noavatar.png' alt='logo-user' width={40} height={40} />
-                                Huy
-                            </div>
-                        </td>
-                        <td className='p-3'>
-                            <span>taolahuy2k0@gmail.com</span>
-                        </td>
-                        <td className='p-3'>
-                            <span>Oct 30 2023</span>
-                        </td>
-                        <td className='p-3'>
-                            <span>Client</span>
-                        </td>
-                        <td className='p-3'>
-                            <span>Passive</span>
-                        </td>
-                        <td className='p-3'>
-                            <div className='flex gap-2 items-center'>
-                                <Link href={'/'}>
-                                    <Button
-                                        title='View'
-                                        styles='p-2 bg-blue-600 text-white border-none rounded-md cursor-pointer hover:font-bold'
-                                    />
-                                </Link>
-                                <Button
-                                    title='Delete'
-                                    styles='p-2 bg-red-600 text-white border-none rounded-md cursor-pointer hover:font-bold'
-                                />
-                            </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td className='p-3'>
+                                    <div className='flex gap-3 items-center'>
+                                        <Image style={{ borderRadius: '50%' }} className='object-cover' src='/noavatar.png' alt='logo-user' width={40} height={40} />
+                                        Huy
+                                    </div>
+                                </td>
+                                <td className='p-3'>
+                                    <span>taolahuy2k0@gmail.com</span>
+                                </td>
+                                <td className='p-3'>
+                                    <span>Oct 30 2023</span>
+                                </td>
+                                <td className='p-3'>
+                                    <span>Client</span>
+                                </td>
+                                <td className='p-3'>
+                                    <span>Passive</span>
+                                </td>
+                                <td className='p-3'>
+                                    <div className='flex gap-2 items-center'>
+                                        <Link href={'/'}>
+                                            <Button
+                                                title='View'
+                                                styles='p-2 bg-blue-600 text-white border-none rounded-md cursor-pointer hover:font-bold'
+                                            />
+                                        </Link>
+                                        <Button
+                                            title='Delete'
+                                            styles='p-2 bg-red-600 text-white border-none rounded-md cursor-pointer hover:font-bold'
+                                        />
+                                    </div>
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className='p-3'>
-                            <div className='flex gap-3 items-center'>
-                                <Image style={{ borderRadius: '50%' }} className='object-cover' src='/noavatar.png' alt='logo-user' width={40} height={40} />
-                                Huy
-                            </div>
-                        </td>
-                        <td className='p-3'>
-                            <span>taolahuy2k0@gmail.com</span>
-                        </td>
-                        <td className='p-3'>
-                            <span>Oct 30 2023</span>
-                        </td>
-                        <td className='p-3'>
-                            <span>Client</span>
-                        </td>
-                        <td className='p-3'>
-                            <span>Passive</span>
-                        </td>
-                        <td className='p-3'>
-                            <div className='flex gap-2 items-center'>
-                                <Link href={'/'}>
-                                    <Button
-                                        title='View'
-                                        styles='p-2 bg-blue-600 text-white border-none rounded-md cursor-pointer hover:font-bold'
-                                    />
-                                </Link>
-                                <Button
-                                    title='Delete'
-                                    styles='p-2 bg-red-600 text-white border-none rounded-md cursor-pointer hover:font-bold'
-                                />
-                            </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td className='p-3'>
+                                    <div className='flex gap-3 items-center'>
+                                        <Image style={{ borderRadius: '50%' }} className='object-cover' src='/noavatar.png' alt='logo-user' width={40} height={40} />
+                                        Huy
+                                    </div>
+                                </td>
+                                <td className='p-3'>
+                                    <span>taolahuy2k0@gmail.com</span>
+                                </td>
+                                <td className='p-3'>
+                                    <span>Oct 30 2023</span>
+                                </td>
+                                <td className='p-3'>
+                                    <span>Client</span>
+                                </td>
+                                <td className='p-3'>
+                                    <span>Passive</span>
+                                </td>
+                                <td className='p-3'>
+                                    <div className='flex gap-2 items-center'>
+                                        <Link href={'/'}>
+                                            <Button
+                                                title='View'
+                                                styles='p-2 bg-blue-600 text-white border-none rounded-md cursor-pointer hover:font-bold'
+                                            />
+                                        </Link>
+                                        <Button
+                                            title='Delete'
+                                            styles='p-2 bg-red-600 text-white border-none rounded-md cursor-pointer hover:font-bold'
+                                        />
+                                    </div>
 
-                        </td>
-                    </tr>
+                                </td>
+                            </tr> */}
+                            </>
+                    ))}
                 </tbody>
             </table>
-            <Pagination />                
+            <Pagination />
         </div>
     )
 }
 
 export default Users
+
