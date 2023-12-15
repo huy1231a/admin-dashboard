@@ -105,7 +105,7 @@ const Users = async () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map((users) => (
+                    {users.map((users: any) => (
                         <>
                             <tr key={users.id}>
                                 <td className='p-3'>
@@ -128,7 +128,7 @@ const Users = async () => {
                                 </td>
                                 <td className='p-3'>
                                     <div className='flex gap-2 items-center'>
-                                        <Link href={'/'}>
+                                        <Link href={`/dashboard/users/${users.id}`}>
                                             <Button
                                                 title='View'
                                                 styles='p-2 bg-blue-600 text-white border-none rounded-md cursor-pointer hover:font-bold'
